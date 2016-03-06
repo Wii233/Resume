@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Resume</title>
+    <meta name="description" content="Resume-ZJ">
+    <link rel="stylesheet" href="../style/scrollpage.css"/>
+    <style type="text/css">
+
+    </style>
+</head>
+<body>
+	<div class="scrollpage">
+		<div class="scrollpage__item scrollpage__item-1">
+			<div class="scrollpage__item-wrap">
+			<h2 class="scrollpage__item-title">个人信息</h2>
+			<div class="scrollpage__item-entry">
+				<p>目标城市：</p>
+				<p>坐标：</p>
+				<p>籍贯：</p>
+				<p>phone：</p>
+			</div>
+			<div class="scrollpage__item-content">
+				<p>北京</p>
+				<p>武汉</p>
+				<p>河北沧州</p>
+				<p>18062414590</p>
+			</div>
+			</div>
+		</div>
+		<div class="scrollpage__item scrollpage__item-2">
+			<div class="scrollpage__item-wrap">
+			<h2 class="scrollpage__item-title">主要技能</h2>
+			<div class="scrollpage__item-entry">
+				<p>CSS</p>
+				<p>Less</p>
+				<p>JS</p>
+				<p>Zepto/Jquery</p>
+				<p>JSP</p>
+			</div>
+			<div class="scrollpage__item-content">
+				<div class="scrollpage__item-full"><div class="scrollpage__item-score"></div></div> 
+				<div class="scrollpage__item-full"><div class="scrollpage__item-score"></div></div> 
+				<div class="scrollpage__item-full"><div class="scrollpage__item-score"></div></div> 
+				<div class="scrollpage__item-full"><div class="scrollpage__item-score"></div></div> 
+				<div class="scrollpage__item-full"><div class="scrollpage__item-score"></div></div> 
+			</div>
+			</div>
+		</div>
+		<div class="scrollpage__item scrollpage__item-3">
+			<div class="scrollpage__item-wrap">
+			<h2 class="scrollpage__item-title">相关经历</h2>
+				<div class="scrollpage__item-content">
+				<p>2015.03</p>
+				<p>2015.08</p>
+				<p>2015.12</p>
+				<p>2017.06</p>
+			</div>
+			</div>
+		</div>
+		<div class="scrollpage__item scrollpage__item-4">
+			<div class="scrollpage__item-wrap">
+			<h2 class="scrollpage__item-title">自我评价</h2>
+			
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		var childs=$(".scrollpage").children(), 
+			sw=true;
+		    index=childs.size();
+		    u=navigator.userAgent;//兼容Firefox
+		    mousescroll=!(u.indexOf('Gecko') > -1 &&u.indexOf('KHTML') == -1)?"mousewheel":"DOMMouseScroll";
+		function moveShow(next){
+			next.find(".scrollpage__item-wrap").addClass("scrollpage__item-wrap-active");
+			setTimeout(function(){
+				next.find(".scrollpage__item-score").addClass("scrollpage__item-score-active");
+			}, 1000);
+			
+		}
+		document.addEventListener(mousescroll, function scrollPage(event){
+			data = event.wheelDelta? (-event.wheelDelta/120) : (event.detail / 3);
+			if(data> 0){
+				//向下浏览页面
+				var curr=childs.filter(".active")
+				var i=curr.index()+1;
+                if(i<index){
+                //在一次滚动未完成之前阻止后面滚动事件
+                if(sw){
+                	sw=false;
+					setTimeout(function(){sw = true;}, 800);
+					$(".scrollpage").css("transform","translate3d(0px,"+"-100"*i+"%"+", 0px)");
+					childs.eq(i).addClass("active").siblings().removeClass("active");
+					moveShow(childs.eq(i));
+                }
+            	}
+            }else{
+            	//向上浏览页面
+                var curr=childs.filter(".active")
+				var i=curr.index()-1;
+                if(i>-1){
+                if(sw){
+                	sw=false;
+					setTimeout(function(){sw = true;}, 800);
+					$(".scrollpage").css("transform","translate3d(0px,"+"-100"*i+"%"+", 0px)");
+					childs.eq(i).addClass("active").siblings().removeClass("active");
+					moveShow(childs.eq(i));
+				}
+                }      
+            }
+			
+		});
+		childs.eq(0).addClass("active");
+		moveShow(childs.eq(0));
+
+	}); 
+</script>
+</html>
+<!-- $this.animate({"top": (-100 * i + "%")}, settings.time, function () {
+                        setTimeout(function () {
+                            sw = true;
+                        }, 500);
+       
+                        }
+                    });
+	if ($(".scrollpage__item-1").hasClass("active")){
+				$(".scrollpage__item-1").removeClass("active");
+				$(".scrollpage__item-2").addClass("active");
+				$(".scrollpage").css("top","-100%");
+			}else if($(".scrollpage__item-2").hasClass("active")){
+				$(".scrollpage__item-2").removeClass("active");
+				$(".scrollpage__item-3").addClass("active");
+				$(".scrollpage").css("top","-200%");
+			}
+			else if($(".scrollpage__item-3").hasClass("active")){
+				$(".scrollpage__item-3").removeClass("active");
+				$(".scrollpage__item-4").addClass("active");
+				$(".scrollpage").css("top","-300%");
+			}
+	if(i=index-1){
+						$(window).unmousewheel(scrollPage());
+						$("body").css("overflow","auto");
+					}		
+-->
